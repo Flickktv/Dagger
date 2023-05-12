@@ -44,21 +44,12 @@ class MainActivity : AppCompatActivity() {
 
         val userManager = (application as MyApplication).appComponent.userManager()
 
+        userManager.userComponent1!!.inject(this)
+
         super.onCreate(savedInstanceState)
 
-        if (!userManager.isUserLoggedIn()) {
-            if (!userManager.isUserRegistered()) {
-                startActivity(Intent(this, RegistrationActivity::class.java))
-                finish()
-            } else {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            }
-        } else {
-            setContentView(R.layout.activity_main)
-            userManager.userComponent1!!.inject(this)
-            setupViews()
-        }
+        setContentView(R.layout.activity_main)
+        setupViews()
     }
 
     /**
